@@ -18,13 +18,14 @@
     </p>
 
     <ul id='list'>
+        <li data-lat="39.93697" data-lng="116.528992" data-loc="远策中心|朝阳区">远策中心 <br>朝阳区</li>
     </ul>
 
 </body>
 <script src="cookie.js"></script>
 
 <script>
-    let city = '全国'
+    let city = '北京市'
 
     const AK_KEY = 'KPx7nDiVnDGqlWjCnZ6cd6rAsimIpzV3',
         //API_DOMAIN = 'http://api.map.baidu.com'
@@ -38,6 +39,8 @@
     //搜索
     async function search(keyWords, city) {
         //return fetch(`${API_DOMAIN}/place/v2/search?q=${encodeURIComponent(keyWords)}&region=${encodeURIComponent(city)}&output=json&ak=${AK_KEY}`).then(res=>res.json())
+        var as =fetch(`${API_DOMAIN}/place/v2/suggestion?q=${encodeURIComponent(keyWords)}&region=${encodeURIComponent(city)}&city_limit=true&output=json&ak=${AK_KEY}`).then(res => res.json())
+        console.log('as:',as)
         return fetch(`${API_DOMAIN}/place/v2/suggestion?q=${encodeURIComponent(keyWords)}&region=${encodeURIComponent(city)}&city_limit=true&output=json&ak=${AK_KEY}`).then(res => res.json())
 
     }
