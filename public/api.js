@@ -24,7 +24,7 @@ let resultDemo = {
     }
 }
 
-//login 
+//login
 async function login(mobile, verify_code, verify_code_id, type = 1) {
     var fd = new FormData();
     fd.append('mobile', mobile);
@@ -89,7 +89,7 @@ resultDemo = {
 async function sign(longitude, latitude, crsfToken) {
 
     //key = "[!]+K.&`d"
-    //CryptoJS.algo.HMAC.   
+    //CryptoJS.algo.HMAC.
 
     const timestamp = Date.now(),
         p1 = [{
@@ -97,9 +97,11 @@ async function sign(longitude, latitude, crsfToken) {
         }, {
             latitude: latitude
         }, {
-            accuracy: 1999
+            accuracy: 0
         }, {
             timestamp: timestamp
+        }, {
+            macAddr: ""
         }],
         p2 = {
             a: "c0$=[Z#4s)",
@@ -116,15 +118,16 @@ async function sign(longitude, latitude, crsfToken) {
             'Origin': 'https://e.xinrenxinshi.com',
             'Referer': 'https://e.xinrenxinshi.com/index',
             'X-CSRF-TOKEN': crsfToken,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json;charset=UTF-8'
         },
         credentials: 'include',
         body: JSON.stringify({
             longitude,
             latitude,
             signature,
-            accuracy: 1999,
+            accuracy: 0,
+            macAddr: "",
             timestamp: timestamp
         })
     }).then(res => res.json())
@@ -132,7 +135,7 @@ async function sign(longitude, latitude, crsfToken) {
 
 
 
-//取Cookie的值  
+//取Cookie的值
 function getCookie(name) {
     var arg = name + "=";
     var alen = arg.length;
@@ -146,12 +149,12 @@ function getCookie(name) {
     }
     return null;
 }
-//写入到Cookie  
-//name:cookie名称  value:cookie值   
+//写入到Cookie
+//name:cookie名称  value:cookie值
 function setCookie(name, value) {
     var Days = 30;
     var exp = new Date();
-    exp.setTime(exp.getTime() + 60 * 2000); //过期时间 2分钟  
+    exp.setTime(exp.getTime() + 60 * 2000); //过期时间 2分钟
     document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 }
 

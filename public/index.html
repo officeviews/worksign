@@ -3,8 +3,7 @@
 
 <head>
     <title>打卡</title>
-    <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width" />
 </head>
 
 <body>
@@ -164,6 +163,7 @@
             //loc.lat = 42.04732987671876
             //签到
             let result = await sign(loc.lng, loc.lat, crsfToken)
+            // let result = await sign(39.93697, 116.528992, crsfToken)
             result.status ? saveHistory() && alert('签到成功') : displayMessage(result)
         } else {
             displayMessage(tokenRes)
